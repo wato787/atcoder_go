@@ -66,19 +66,24 @@ run:
 	file=$$(basename $(PROBLEM)); \
 	cd "$$dir" && go run main.go
 
-# practiceディレクトリに新しい問題を追加
+# practiceディレクトリに新しい問題を追加（ojと統合）
 .PHONY: new-practice
 new-practice:
 	@problem="$${1}"; \
+	url="$${2}"; \
 	if [ -z "$$problem" ]; then \
-		echo "問題名を指定してください (例: make new-practice A)"; \
+		echo "問題名を指定してください (例: make new-practice practice_1 [URL])"; \
 		exit 1; \
 	fi; \
 	mkdir -p $(PRACTICE_DIR)/$$problem; \
 	cp $(TEMPLATE_FILE) $(PRACTICE_DIR)/$$problem/main.go; \
-	touch $(PRACTICE_DIR)/$$problem/input.txt; \
-	touch $(PRACTICE_DIR)/$$problem/output.txt; \
-	echo "練習問題 $$problem のディレクトリを作成しました"
+	cd $(PRACTICE_DIR)/$$problem && \
+	if [ ! -z "$$url" ]; then \
+		oj d $$url; \
+		echo "$$url からテストケースをダウンロードしました"; \
+	fi; \
+	echo "練習問題 $$problem のディレクトリを作成しました"; \
+	echo "cd $(PRACTICE_DIR)/$$problem でディレクトリに移動できます"
 
 # クリーンアップ
 .PHONY: clean
@@ -86,15 +91,6 @@ clean:
 	@find . -name "*.exe" -type f -delete
 	@find . -name "*.out" -type f -delete
 	@echo "生成ファイルを削除しました"
-
-# ojを使ってテストケースをダウンロード
-.PHONY: download
-download:
-	@if [ -z "$(URL)" ]; then \
-		echo "問題URLを指定してください (例: make download URL=https://atcoder.jp/contests/practice/tasks/practice_1)"; \
-		exit 1; \
-	fi; \
-	oj d $(URL)
 
 # ojを使ってテスト実行
 .PHONY: ojtest
