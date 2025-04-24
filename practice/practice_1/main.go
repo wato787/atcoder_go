@@ -73,16 +73,13 @@ func init() {
 
 func main() {
 	defer wr.Flush()
+	// 入力を読み込む
+	a := scanInt()
+	b := scanInt()
+	c := scanInt()
+	s := scanString()
 	
-	// ここに解答コードを書く
-	n := scanInt()
-	a := scanInts(n)
-	
-	// 例：合計を計算
-	sum := 0
-	for _, v := range a {
-		sum += v
-	}
-	
-	println(sum)
+	// a+b+cと文字列sを出力
+	println(a+b+c, s)
+
 }
