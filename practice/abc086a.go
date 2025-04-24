@@ -1,10 +1,9 @@
 package main
 
 import (
-    "bufio"
-    "fmt"
-    "os"
-    "strconv"
+	"bufio"
+	"os"
+	"strconv"
 )
 
 var sc = bufio.NewScanner(os.Stdin)
