@@ -49,7 +49,7 @@ clean:
 # ojを使ってテスト実行
 .PHONY: ojtest
 ojtest:
-	@$(SCRIPT) ojtest
+	@$(SCRIPT) ojtest $(PROBLEM)
 
 # 引数を無視して実行できるようにするハック
 %:

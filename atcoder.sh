@@ -96,7 +96,16 @@ clean() {
 }
 
 ojtest() {
-    oj t -c "go run main.go"
+    problem=$1
+    project_root=$(git rev-parse --show-toplevel 2>/dev/null || echo "$PWD")
+    
+    if [ -z "$problem" ]; then
+        # 問題が指定されていない場合は現在のディレクトリでテスト
+        oj t -c "go run main.go"
+    else
+        # 問題が指定されている場合はプロジェクトルートから絶対パスを構築
+        cd "$project_root/$problem" && oj t -c "go run main.go"
+    fi
 }
 
 # コマンドライン引数に基づいて関数を実行
