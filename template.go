@@ -25,6 +25,7 @@ func scanInts(n int) []int {
 	return a
 }
 
+
 func scanString() string {
 	sc.Scan()
 	return sc.Text()

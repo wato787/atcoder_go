@@ -87,6 +87,20 @@ clean:
 	@find . -name "*.out" -type f -delete
 	@echo "生成ファイルを削除しました"
 
+# ojを使ってテストケースをダウンロード
+.PHONY: download
+download:
+	@if [ -z "$(URL)" ]; then \
+		echo "問題URLを指定してください (例: make download URL=https://atcoder.jp/contests/practice/tasks/practice_1)"; \
+		exit 1; \
+	fi; \
+	oj d $(URL)
+
+# ojを使ってテスト実行
+.PHONY: ojtest
+ojtest:
+	oj t -c "go run main.go"
+
 # 引数を無視して実行できるようにするハック
 %:
 	@:
