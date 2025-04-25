@@ -72,15 +72,15 @@ new_practice() {
     local url="$1"
     
     if [ -z "$url" ]; then
-        echo "エラー: URLを指定してください (例: new_practice https://example.com/task/12345)"
+        echo "エラー: URLを指定してください (例: new_practice https://atcoder.jp/contests/abs/tasks/abc081_a)"
         exit 1
     fi
     
-    # URLからtask/XXXXXの部分を抽出
-    local problem=$(echo "$url" | grep -o 'task/[0-9]*' | cut -d'/' -f2)
+    # AtCoder URLから問題IDを抽出 (最後の部分を取得)
+    local problem=$(echo "$url" | rev | cut -d'/' -f1 | rev)
     
     if [ -z "$problem" ]; then
-        echo "エラー: URLからtask IDを抽出できませんでした"
+        echo "エラー: URLから問題IDを抽出できませんでした"
         exit 1
     fi
     
