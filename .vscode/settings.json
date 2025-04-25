@@ -1,0 +1,4 @@
+{
+  // コパイロットをoffにする
+  "github.copilot.enable": false
+}
