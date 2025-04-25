@@ -75,14 +75,21 @@ func main() {
 	defer wr.Flush()
 	
 	// ここに解答コードを書く
-	n := scanInt()
-	a := scanInts(n)
-	
-	// 例：合計を計算
-	sum := 0
-	for _, v := range a {
-		sum += v
+	a := scanString()
+	digits := make([]int,len(a))
+	for i , n:= range a {
+		digits[i] = int(n - '0')
 	}
+
+	count := 0
+
+	for _,t := range digits {
+		if t == 1 {
+			count++
+		}
+	}
+
+
 	
-	println(sum)
+	println(count)
 }
