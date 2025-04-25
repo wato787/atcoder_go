@@ -75,14 +75,39 @@ func main() {
 	defer wr.Flush()
 	
 	// ここに解答コードを書く
-	n := scanInt()
-	a := scanInts(n)
+    n := scanInt()
+    // 2行目のスペース区切りの数値を配列として取得
+    arr := scanInts(n)
+
+    // 奇数が紛れ込んでいないかチェック
+    for _, num := range arr {
+        if num % 2 != 0 {
+            println(0)  // 奇数があれば答えは0
+            return
+        }
+    }
+
+    count := 0
+    canDivide := true
+
+    // 全ての要素が2で割り切れる限り続ける
+    for canDivide {
+        canDivide = true
+        
+        // 全ての要素を2で割る
+        for i := 0; i < n; i++ {
+            if arr[i] % 2 != 0 {
+                canDivide = false
+                break
+            }
+            arr[i] = arr[i] / 2
+        }
+        
+        // 全て2で割れたらカウントを増やす
+        if canDivide {
+            count++
+        }
+    }
 	
-	// 例：合計を計算
-	sum := 0
-	for _, v := range a {
-		sum += v
-	}
-	
-	println(sum)
+	println(count)
 }
