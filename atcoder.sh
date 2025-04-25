@@ -69,21 +69,26 @@ run_problem() {
 }
 
 new_practice() {
-    local problem="$1"
-    local url="$2"
+    local url="$1"
+    
+    if [ -z "$url" ]; then
+        echo "エラー: URLを指定してください (例: new_practice https://example.com/task/12345)"
+        exit 1
+    fi
+    
+    # URLからtask/XXXXXの部分を抽出
+    local problem=$(echo "$url" | grep -o 'task/[0-9]*' | cut -d'/' -f2)
     
     if [ -z "$problem" ]; then
-        echo "エラー: 問題名を指定してください (例: practice_1 [URL])"
+        echo "エラー: URLからtask IDを抽出できませんでした"
         exit 1
     fi
     
     mkdir -p "${PRACTICE_DIR}/${problem}"
     cp "${TEMPLATE_FILE}" "${PRACTICE_DIR}/${problem}/main.go"
     
-    if [ ! -z "$url" ]; then
-        cd "${PRACTICE_DIR}/${problem}" && oj d "$url"
-        echo "$url からテストケースをダウンロードしました"
-    fi
+    cd "${PRACTICE_DIR}/${problem}" && oj d "$url"
+    echo "$url からテストケースをダウンロードしました"
     
     echo "練習問題 $problem のディレクトリを作成しました"
     echo "cd ${PRACTICE_DIR}/${problem} でディレクトリに移動できます"
