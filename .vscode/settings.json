@@ -1,4 +1,6 @@
 {
   // コパイロットをoffにする
-  "github.copilot.enable": false
+  "github.copilot.enable": false,
+  // フォーマット
+  "editor.formatOnSave": true
 }
