@@ -76,13 +76,16 @@ func isEven(n int) bool {
 }
 
 func max(n []int) int {
-	max := -9999999
-for _, s := range n {
-	if max < s {
-		max = s
-	}
-}
-return max
+    if len(n) == 0 {
+        return -9999999 // または適切なエラー処理
+    }
+    max := n[0]
+    for _, s := range n {
+        if max < s {
+            max = s
+        }
+    }
+    return max
 }
 
 
