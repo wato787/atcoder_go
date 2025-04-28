@@ -75,6 +75,27 @@ func isEven(n int) bool {
 	return n % 2 == 0 
 }
 
+func max(n []int) int {
+	max := -9999999
+for _, s := range n {
+	if max < s {
+		max = s
+	}
+}
+return max
+}
+
+
+func min(n []int) int {
+	max := -9999999
+for _, s := range n {
+	if max > s {
+		max = s
+	}
+}
+return max
+}
+
 func init() {
 	sc.Split(bufio.ScanWords)
 	sc.Buffer(make([]byte, 1024), 1<<20) // 1MB
