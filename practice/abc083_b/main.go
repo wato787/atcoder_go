@@ -76,13 +76,36 @@ func main() {
 	
 	// ここに解答コードを書く
 	n := scanInt()
-	a := scanInts(n)
-	
-	// 例：合計を計算
-	sum := 0
-	for _, v := range a {
-		sum += v
-	}
-	
-	println(sum)
+	a := scanInt()
+	b := scanInt()
+
+// N 以下の整数のうち、
+// 10 進法での各桁の和が 
+// A 以上 
+// B 以下であるものの総和を出力せよ。
+
+    sum := 0
+    
+    // 1からn以下をループ
+    for i := 1; i <= n; i++ {
+        // 各桁の和を計算
+        ds := digitSum(i)
+        
+        // 各桁の和がA以上B以下かチェック
+        if ds >= a && ds <= b {
+            sum += i  // 条件を満たす場合、合計に追加
+        }
+    }
+    
+    println(sum)
+}
+
+// 数値の各桁の和を計算する関数
+func digitSum(num int) int {
+    sum := 0
+    for num > 0 {
+        sum += num % 10  // 一番右の桁を取得
+        num /= 10        // 右の桁を削除
+    }
+    return sum
 }
