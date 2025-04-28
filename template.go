@@ -39,6 +39,7 @@ func scanStrings(n int) []string {
 	return s
 }
 
+
 func printInts(a []int) {
 	for i, v := range a {
 		if i > 0 {
@@ -64,6 +65,14 @@ func println(a ...interface{}) {
 		}
 	}
 	wr.WriteByte('\n')
+}
+
+func isOdd(n int) bool {
+	return n % 2 != 0 
+}
+
+func isEven(n int) bool {
+	return n % 2 == 0 
 }
 
 func init() {
