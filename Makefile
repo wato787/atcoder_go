@@ -21,10 +21,10 @@ help:
 new-contest:
 	@$(SCRIPT) new-contest $(filter-out $@,$(MAKECMDGOALS))
 
-# 新しい問題ディレクトリを作成
-.PHONY: new-problem
-new-problem:
-	@$(SCRIPT) new-problem $(word 1,$(filter-out $@,$(MAKECMDGOALS))) $(word 2,$(filter-out $@,$(MAKECMDGOALS)))
+# # 新しい問題ディレクトリを作成
+# .PHONY: new-problem
+# new-problem:
+# 	@$(SCRIPT) new-problem $(word 1,$(filter-out $@,$(MAKECMDGOALS))) $(word 2,$(filter-out $@,$(MAKECMDGOALS)))
 
 # 問題のテスト実行
 .PHONY: test
