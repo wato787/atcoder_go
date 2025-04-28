@@ -2,5 +2,6 @@
   // コパイロットをoffにする
   "github.copilot.enable": false,
   // フォーマット
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true, // goのformat
+  "go.formatTool": "goimports"
 }
