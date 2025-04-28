@@ -39,6 +39,35 @@ func scanStrings(n int) []string {
 	return s
 }
 
+func isOdd(n int) bool {
+	return n % 2 != 0 
+}
+
+func isEven(n int) bool {
+	return n % 2 == 0 
+}
+
+func max(n []int) int {
+	max := -9999999
+for _, s := range n {
+	if max < s {
+		max = s
+	}
+}
+return max
+}
+
+
+func min(n []int) int {
+	max := -9999999
+for _, s := range n {
+	if max > s {
+		max = s
+	}
+}
+return max
+}
+
 func printInts(a []int) {
 	for i, v := range a {
 		if i > 0 {
@@ -72,17 +101,39 @@ func init() {
 }
 
 func main() {
-	defer wr.Flush()
-	
-	// ここに解答コードを書く
-	n := scanInt()
-	a := scanInts(n)
-	
-	// 例：合計を計算
-	sum := 0
-	for _, v := range a {
-		sum += v
-	}
-	
-	println(sum)
+    defer wr.Flush()
+    
+    // ここに解答コードを書く
+    n := scanInt()
+    a := scanInts(n)
+
+    alice := 0
+    bob := 0
+
+    // 配列をソートする必要はなく、最大値を取り出していく
+    // 交互に行う
+    for i := 0; i < n; i++ {
+        // 最大値とそのインデックスを取得
+        maxVal := -9999999
+        maxIdx := 0
+        for j, v := range a {
+            if v > maxVal {
+                maxVal = v
+                maxIdx = j
+            }
+        }
+        
+        // 最大値を配列から削除（非常に大きな負の値に置き換え）
+        a[maxIdx] = -10000000
+        
+        // アリスのターン（偶数回目）
+        if i % 2 == 0 {
+            alice += maxVal
+        } else { // ボブのターン（奇数回目）
+            bob += maxVal
+        }
+    }
+    
+    // アリスとボブの点数の差を出力
+    println(alice - bob)
 }
