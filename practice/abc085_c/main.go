@@ -105,17 +105,29 @@ func init() {
 }
 
 func main() {
-	defer wr.Flush()
-	
-	// ここに解答コードを書く
-	n := scanInt()
-	a := scanInts(n)
-	
-	// 例：合計を計算
-	sum := 0
-	for _, v := range a {
-		sum += v
-	}
-	
-	println(sum)
+    defer wr.Flush()
+    
+    // ここに解答コードを書く
+    n := scanInt()
+    y := scanInt()
+    
+    // 10000円札をi枚、5000円札をj枚使った場合を全探索
+    for i := 0; i <= n; i++ {
+        for j := 0; j <= n-i; j++ {
+            // 残りは1000円札
+            k := n - i - j
+            
+            // 合計金額を計算
+            total := 10000*i + 5000*j + 1000*k
+            
+            // 合計金額がYと一致するか確認
+            if total == y {
+                println(i, j, k)
+                return
+            }
+        }
+    }
+    
+    // 条件を満たす組み合わせがない場合
+    println(-1, -1, -1)
 }
