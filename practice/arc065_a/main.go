@@ -105,17 +105,51 @@ func init() {
 }
 
 func main() {
-	defer wr.Flush()
-	
-	// ここに解答コードを書く
-	n := scanInt()
-	a := scanInts(n)
-	
-	// 例：合計を計算
-	sum := 0
-	for _, v := range a {
-		sum += v
-	}
-	
-	println(sum)
+    defer wr.Flush()
+    
+    // ここに解答コードを書く
+    s := scanString()
+    
+    // 後ろから判定するため、文字列を反転する
+    reversed := reverseString(s)
+    
+    // 判定用の単語も反転しておく
+    patterns := []string{
+        reverseString("dream"),
+        reverseString("dreamer"),
+        reverseString("erase"),
+        reverseString("eraser"),
+    }
+    
+    // 反転した文字列を先頭から調べていく
+    pos := 0
+    for pos < len(reversed) {
+        found := false
+        for _, pattern := range patterns {
+            if pos+len(pattern) <= len(reversed) && reversed[pos:pos+len(pattern)] == pattern {
+                // パターンが一致した場合、その分だけ進む
+                pos += len(pattern)
+                found = true
+                break
+            }
+        }
+        
+        // どのパターンにも一致しなかった場合
+        if !found {
+            println("NO")
+            return
+        }
+    }
+    
+    // 最後まで判定できた場合
+    println("YES")
+}
+
+// 文字列を反転する関数
+func reverseString(s string) string {
+    runes := []rune(s)
+    for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
+        runes[i], runes[j] = runes[j], runes[i]
+    }
+    return string(runes)
 }
