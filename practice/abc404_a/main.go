@@ -108,14 +108,25 @@ func main() {
 	defer wr.Flush()
 	
 	// ここに解答コードを書く
-	n := scanInt()
-	a := scanInts(n)
-	
-	// 例：合計を計算
-	sum := 0
-	for _, v := range a {
-		sum += v
+	S := scanString()
+
+	exists := make(map[byte]bool)
+
+		// 文字列Sの各文字をマップに記録
+	for i := 0; i < len(S); i++ {
+		exists[S[i]] = true
 	}
 	
-	println(sum)
+		// アルファベットの各文字をチェック
+	for c := byte('a'); c <= byte('z'); c++ {
+		// もし文字cがSに含まれていなければ、それを出力して終了
+		if !exists[c] {
+			println(string(c))
+			return
+		}
+	}
+
+	
+
 }
+
